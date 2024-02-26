@@ -66,7 +66,7 @@ def generate_candlestick_chart(remail):
     selected_index = 0
     csv_file = csv_files[selected_index]
 
-    default_start_date = parse_date_input((datetime.now() - timedelta(days=200)).strftime('%Y-%m-%d'))
+    default_start_date = parse_date_input((datetime.now() - timedelta(days=150)).strftime('%Y-%m-%d'))
     start_date = parse_date_input(default_start_date)
     end_date = parse_date_input(datetime.now().strftime('%Y-%m-%d'))
     interval_options = ["1d", "2m", "5m", "15m", "30m", "60m", "90m", "1m", "1h", "5d", "1wk", "1mo", "3mo"]
