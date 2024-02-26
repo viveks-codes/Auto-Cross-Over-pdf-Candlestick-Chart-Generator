@@ -10,8 +10,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-import time
-from email.mime.text import MIMEText  
+import traceback
 
 app = Flask(__name__)
 
@@ -45,7 +44,7 @@ def plot_candlestick_to_pdf(symbol, start_date, end_date, interval='1h', emas=(1
         plt.close(fig)
 
     except Exception as e:
-        pass
+        traceback.print_exc()
 
 def parse_emas_input(input_string):
     if not input_string.strip():  # If the input is empty, use default values
@@ -133,4 +132,4 @@ def generate_candlestick_chart_route():
         return jsonify({'error': 'Email parameter missing.'}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, threaded=True, host='0.0.0.0', port=os.environ.get('PORT', 5000), use_reloader=False)
