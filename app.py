@@ -1,3 +1,4 @@
+from flask import Flask, request, jsonify
 import os
 import yfinance as yf
 import mplfinance as mpf
@@ -12,6 +13,8 @@ from email import encoders
 import schedule
 import time
 from email.mime.text import MIMEText  
+
+app = Flask(__name__)
 
 def plot_candlestick_to_pdf(symbol, start_date, end_date, interval='1h', emas=(10, 50, 100), pdf_pages=None):
     try:
@@ -57,7 +60,7 @@ def parse_date_input(date_string):
     except ValueError:
         return default_date
 
-def generate_candlestick_chart():
+def generate_candlestick_chart(remail):
     output_file = 'candlestick_charts_all_symbols5.pdf'
     pdf_pages_candlestick = PdfPages(output_file)
 
@@ -83,10 +86,9 @@ def generate_candlestick_chart():
     
     # Close the PDF file for candlestick charts
     pdf_pages_candlestick.close()
-    recipients = ["vivolscute@gmail.com", "vritika.f2002@gmail.com", "kachhiaaryan1@gmail.com","ai20.kavita.chaudhari@gmail.com"]  # List of recipient email addresses
+    recipients = [remail]  # List of recipient email addresses
     for recipient_email in recipients:
         send_email(attachment_file=output_file, recipient_email=recipient_email)
-
 
 def send_email(attachment_file,recipient_email):
     email_address = "ai20.vivek.patel@gmail.com"
@@ -115,10 +117,23 @@ def send_email(attachment_file,recipient_email):
         server.login(email_address, app_password)
         server.sendmail(email_address, recipient_email, message.as_string())
 
-# Schedule tasks to run at specific time every day
-schedule.every().day.at("08:00").do(generate_candlestick_chart)  # Set the desired time
 
 while True:
     schedule.run_pending()
     time.sleep(1)
-# generate_candlestick_chart()
+
+@app.route('/')
+def index():
+    return 'Welcome to Candlestick Chart Generator!'
+
+@app.route('/generate_candlestick_chart', methods=['GET'])
+def generate_candlestick_chart_route():
+    email = request.args.get('email')
+    if email:
+        generate_candlestick_chart(remail=email)
+        return jsonify({'message': 'Candlestick chart generated and email sent successfully.'}), 200
+    else:
+        return jsonify({'error': 'Email parameter missing.'}), 400
+
+if __name__ == "__main__":
+    app.run(debug=True)
