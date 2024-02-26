@@ -10,7 +10,6 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-import schedule
 import time
 from email.mime.text import MIMEText  
 
@@ -118,9 +117,7 @@ def send_email(attachment_file,recipient_email):
         server.sendmail(email_address, recipient_email, message.as_string())
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+
 
 @app.route('/')
 def index():
