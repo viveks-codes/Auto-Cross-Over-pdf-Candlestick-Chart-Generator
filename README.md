@@ -1,4 +1,5 @@
 # Demo 📈
+https://stonkstream-j6qrukmayby8hkxr3dwch3.streamlit.app/
 https://stnkyf-hgnjuscxk54j4xb4scwhuu.streamlit.app/
 
 # 📈 Candlestick Chart Generator
