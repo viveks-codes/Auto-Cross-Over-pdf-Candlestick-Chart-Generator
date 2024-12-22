@@ -1,7 +1,7 @@
 # Demo 📈
-https://stonkstream-j6qrukmayby8hkxr3dwch3.streamlit.app/
-https://stnkyf-hgnjuscxk54j4xb4scwhuu.streamlit.app/
-
+- https://stonkstream-j6qrukmayby8hkxr3dwch3.streamlit.app/
+- https://stnkyf-hgnjuscxk54j4xb4scwhuu.streamlit.app/
+- https://linestream-aa4eid2emajwwpt4ogv4ns.streamlit.app/
 # 📈 Candlestick Chart Generator
 
 A powerful Streamlit web application that generates and emails candlestick charts with EMA indicators for multiple stock symbols. Built with Python, yfinance, and mplfinance.
