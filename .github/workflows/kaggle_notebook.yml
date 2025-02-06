@@ -3,6 +3,7 @@ name: Run Kaggle Notebook Daily
 on:
   schedule:
     - cron: "0 6 * * *"  # Runs daily at 6 AM UTC
+  workflow_dispatch:  # Allows manual execution from the GitHub Actions UI
 
 jobs:
   run-notebook:
