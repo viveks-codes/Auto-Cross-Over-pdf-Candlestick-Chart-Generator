@@ -22,4 +22,4 @@ jobs:
           chmod 600 ~/.kaggle/kaggle.json
 
       - name: Push Notebook to Kaggle
-        run: kaggle kernels push -p .
+        run: kaggle kernels push -p autotrade.ipynb
