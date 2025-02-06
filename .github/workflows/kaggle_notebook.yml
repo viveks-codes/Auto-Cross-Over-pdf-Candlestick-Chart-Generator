@@ -3,7 +3,7 @@ name: Run Kaggle Notebook Daily
 on:
   schedule:
     - cron: "0 6 * * *"  # Runs daily at 6 AM UTC
-  workflow_dispatch:  # Allows manual execution from the GitHub Actions UI
+  workflow_dispatch:
 
 jobs:
   run-notebook:
@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: List repository files (debugging)
+        run: ls -la  # Ensure autotrade.ipynb is present
 
       - name: Install Kaggle API
         run: pip install kaggle
@@ -20,6 +23,21 @@ jobs:
           mkdir -p ~/.kaggle
           echo "{\"username\":\"${{ secrets.KAGGLE_USERNAME }}\",\"key\":\"${{ secrets.KAGGLE_KEY }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
+
+      - name: Ensure kernel-metadata.json exists
+        run: |
+          echo '{
+            "title": "AutoTrade Notebook",
+            "code_file": "autotrade.ipynb",
+            "language": "python",
+            "kernel_type": "notebook",
+            "is_private": true,
+            "enable_gpu": false,
+            "enable_internet": false
+          }' > kernel-metadata.json
+
+      - name: Verify files before push
+        run: ls -la  # Confirm autotrade.ipynb & kernel-metadata.json exist
 
       - name: Push Notebook to Kaggle
         run: kaggle kernels push -p .
