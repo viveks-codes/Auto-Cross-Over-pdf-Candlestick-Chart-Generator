@@ -20,5 +20,5 @@ jobs:
           echo "{\"username\":\"${{ secrets.KAGGLE_USERNAME }}\",\"key\":\"${{ secrets.KAGGLE_KEY }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
 
-      - name: Run Kaggle Notebook
-        run: kaggle kernels push -p autotrade.ipynb
+      - name: Push Notebook to Kaggle
+        run: kaggle kernels push -p .
