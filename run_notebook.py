@@ -9,7 +9,7 @@ with open(os.path.expanduser("~/.kaggle/kaggle.json"), "w") as f:
 os.chmod(os.path.expanduser("~/.kaggle/kaggle.json"), 0o600)
 
 # Push notebook to Kaggle and run it
-NOTEBOOK_FILE = "selenium_on_kaggle.ipynb"
+NOTEBOOK_FILE = "selenium-on-kaggle-easy-tutorial (1).ipynb"
 NOTEBOOK_TITLE = "Selenium On Kaggle Daily Run"
 NOTEBOOK_SLUG = "selenium-on-kaggle-daily-run"
 NOTEBOOK_KERNEL_REF = f"{os.environ['KAGGLE_USERNAME']}/{NOTEBOOK_SLUG}"
